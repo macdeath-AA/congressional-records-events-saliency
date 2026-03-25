@@ -67,7 +67,8 @@ spacy
 sentence-transformers
 bertopic
 scikit-learn
-ruptures
+vaderSentiment
+textstat
 matplotlib
 seaborn
 wordcloud
@@ -107,8 +108,8 @@ Runs topic modeling and preliminary event detection on the cleaned weekly corpus
 **What it does:**
 - TF-IDF vectorization over weekly windows
 - Word trend plots and heatmaps
-- Preliminary change-point detection using `ruptures`
 - Wordcloud visualizations per congress session
+- Sentiment Scoring and analysis using vaderSentiment
 
 ---
 
@@ -122,12 +123,13 @@ Runs topic modeling and preliminary event detection on the cleaned weekly corpus
 
 ---
 
-## Next Steps (Checkpoint 3)
+## Next Steps (Checkpoint 4)
 
 - Fit BERTopic over full weekly corpus
-- Extract topic distribution time series
+- Use extracted topic distributions time series for event detection
 - Apply `ruptures` change-point detection to topic signals
 - Validate detected change-points against a manually curated ground truth list of ~20 major events
+- If time permits, further analysis of 'You Have the Floor' corpus
 
 ---
 
