@@ -23,7 +23,7 @@ This project analyzes 150+ years of US Congressional speech to detect the lingui
 congressional-records-events-saliency/
 ├── code/
 │   ├── preprocessing.ipynb     # Data loading, cleaning, aggregation pipeline
-│   └── analysis.ipynb          # Topic modeling, TF-IDF analysis, event detection
+│   └── analysis.ipynb          # Topic modeling, TF-IDF analysis, feature extraction
 ├── data/
 │   └── hein-daily/             # Raw Gentzkow dataset (NOT included, must be downloaded)
 │       ├── speeches_097.txt    # Raw speeches per congress session (097–114)
