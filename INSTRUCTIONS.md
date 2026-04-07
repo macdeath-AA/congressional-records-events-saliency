@@ -1,4 +1,5 @@
 # INSTRUCTIONS.md
+
 # AI Workflow Guide — Political Memory: Event Detection and Saliency Decay in the Congressional Record
 
 This file is intended to help an LLM (Claude, GPT, Gemini, etc.) understand the structure, purpose, and execution of this project so it can assist with building, running, and extending it.
@@ -10,6 +11,7 @@ This file is intended to help an LLM (Claude, GPT, Gemini, etc.) understand the 
 This project analyzes 150+ years of US Congressional speech to detect the linguistic footprint of major external events and measure how long that footprint persists (saliency decay). The pipeline is fully unsupervised and NLP-driven.
 
 **Core research questions:**
+
 - When a major event occurs (e.g. 9/11, 2008 financial crisis), how does it register in congressional speech?
 - How quickly does that linguistic signal decay over subsequent weeks?
 
@@ -41,11 +43,13 @@ congressional-records-events-saliency/
 ## Data
 
 The raw data is from the **Gentzkow, Shapiro & Taddy Congressional Speech Dataset**:
+
 - Download: https://data.stanford.edu/congress_text
 - Total size: ~31GB, not included in this repo
 - Place downloaded files under `data/hein-daily/`
 
 Each congress session has three files:
+
 - `speeches_NNN.txt` — pipe-delimited, columns: `speech_id | speech`
 - `descr_NNN.txt` — pipe-delimited, columns: `speech_id | chamber | date | ...`
 - `NNN_SpeakerMap.txt` — maps speaker IDs to names and parties
@@ -59,6 +63,7 @@ The processed output files in `my_data/` are the cleaned, merged results ready f
 **Python version:** 3.10
 
 **Key dependencies:**
+
 ```
 pandas
 numpy
@@ -76,6 +81,7 @@ torch (CPU version recommended if no GPU)
 ```
 
 **Install:**
+
 ```bash
 pip install pandas numpy nltk spacy sentence-transformers bertopic scikit-learn ruptures matplotlib seaborn wordcloud
 pip install torch --index-url https://download.pytorch.org/whl/cpu
@@ -91,6 +97,7 @@ python -m spacy download en_core_web_sm
 Loads raw Gentzkow data, cleans it, and produces the weekly aggregated corpus.
 
 **Cleaning pipeline in order:**
+
 1. Load and merge `speeches`, `descr`, and `SpeakerMap` files
 2. `removeProcedural(df)` — removes speeches by procedural speakers (The Speaker, The Clerk, etc.)
 3. `filterWordCount(df, minWords=50)` — removes speeches under 50 words
@@ -106,10 +113,13 @@ Loads raw Gentzkow data, cleans it, and produces the weekly aggregated corpus.
 Runs topic modeling and preliminary event detection on the cleaned weekly corpus.
 
 **What it does:**
+
 - TF-IDF vectorization over weekly windows
 - Word trend plots and heatmaps
 - Wordcloud visualizations per congress session
 - Sentiment Scoring and analysis using vaderSentiment
+- Named Entity Recognition
+- Event Detection and event analysis
 
 ---
 
@@ -123,13 +133,13 @@ Runs topic modeling and preliminary event detection on the cleaned weekly corpus
 
 ---
 
-## Next Steps (Checkpoint 4)
+## Next Steps (Checkpoint 5)
 
 - Fit BERTopic over full weekly corpus
-- Use extracted topic distributions time series for event detection
 - Apply `ruptures` change-point detection to topic signals
 - Validate detected change-points against a manually curated ground truth list of ~20 major events
-- If time permits, further analysis of 'You Have the Floor' corpus
+- Saliency Decay and Analysis
+- Analysis of 'You have the Floor' corpus
 
 ---
 
